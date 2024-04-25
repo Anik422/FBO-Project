@@ -1,0 +1,172 @@
+{% extends "user_base.html" %} 
+{% load static %} 
+{% block title %}Sign Up{% endblock %} 
+{% block contentBody %}
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div
+    class="relative flex flex-col m-6 space-y-8 bg-white shadow-2xl rounded-2xl md:flex-row md:space-y-0"
+  >
+    <!-- left side  -->
+    <div class="relative">
+      <img
+        src="https://images.pexels.com/photos/2246476/pexels-photo-2246476.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        alt="img"
+        class="w-[400px] h-full hidden rounded-l-2xl md:block object-cover"
+      />
+    </div>
+    <!-- left side -->
+    <div class="flex flex-col justify-center p-8 md:p-14">
+      <span class="mb-3 text-4xl font-bold">Register</span>
+      <span class="font-light text-gray-400">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      </span>
+      {% if form.errors.items %}
+            <div
+                class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                role="alert"
+            >
+                <div class="flex">
+                    <div class="py-1">
+                        <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
+                    </div>
+                    <div>
+                        {% for field, errors in form.errors.items %} 
+                            {% for error in errors %}
+                            <span class="block sm:inline">{{error}}</span>
+                            {% endfor %} 
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+      <!-- right side -->
+
+      <div class=" ">
+        <form action="{% url 'users:sign_up' %}"
+            method="POST"
+            id="signUpForm"
+        >
+            {% csrf_token %}
+          <div class="grid grid-cols-2 gap-5 mt-5">
+            <div>
+              <span class="mb-2 text-md">First Name</span>
+              <input
+                type="text"
+                class="w-full p-2 border border-gray-300 rounded-md placeholder:font-light"
+                autofocus
+                placeholder="First Name"
+                id="firstName"
+                name="first_name"
+                value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
+              />
+              <div class="text-red-500">
+                <span class="text-red-500 text-xs" id="firstNameError"> </span>
+              </div>
+            </div>
+            <div>
+              <span class="mb-2 text-md">Last Name</span>
+              <input
+                type="text"
+                class="w-full p-2 border border-gray-300 rounded-md placeholder:font-light"
+                placeholder="Last Name"
+                id="lastName"
+                name="last_name"
+                value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}"
+              />
+              <div class="text-red-500">
+                <span class="text-red-500 text-xs" id="lastNameError"> </span>
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-5 mt-5">
+            <div>
+                <span class="mb-2 text-md">Username</span>
+                <input
+                type="text"
+                class="w-full p-2 border border-gray-300 rounded-md placeholder:font-light"
+                placeholder="Username"
+                id="userName"
+                name="username"
+                value="{% if form.username.value %}{{ form.username.value }}{% endif %}"
+                />
+                <div class="text-red-500">
+                    <span class="text-red-500 text-xs" id="userNameError"> </span>
+                  </div>
+            </div>
+            <div>
+                <span class="mb-2 text-md">Email</span>
+                <input
+                type="text"
+                class="w-full p-2 border border-gray-300 rounded-md placeholder:font-light"
+                placeholder="Email"
+                id="email"
+                name="email"
+                value="{% if form.email.value %}{{ form.email.value }}{% endif %}"
+                />
+                <div class="text-red-500">
+                    <span class="text-red-500 text-xs" id="emailError"> </span>
+                  </div>
+            </div>
+          </div>
+          <div class="mt-5">
+            <span class="mb-2 text-md">Password</span>
+            <input
+              type="password"
+              class="w-full p-2 border border-gray-300 rounded-md"
+              placeholder="Password"
+                id="password"
+                name="password1"
+            />
+            <div class="text-red-500">
+                <span class="text-red-500 text-xs" id="passwordError"> </span>
+              </div>
+          </div>
+          <div class="mt-5">
+            <span class="mb-2 text-md">Confirm Password</span>
+            <input
+              type="password"
+              class="w-full p-2 border border-gray-300 rounded-md"
+              placeholder="Confirm Password"
+                id="confirmPassword"
+                name="password2"
+            />
+            <div class="text-red-500">
+                <span class="text-red-500 text-xs" id="confirmPasswordError"> </span>
+              </div>
+          </div>
+          <div class="mt-5">
+            <input 
+            type="checkbox" 
+            class="border border-gray-400" 
+            id="terms"
+            />
+            <span>
+              I accept the
+              <a href="#" class="text-purple-500 font-semibold">Terms of Use</a>
+              &
+              <a href="#" class="text-purple-500 font-semibold"
+                >Privacy Policy</a
+              >
+            </span>
+          </div>
+          <div class="mt-5">
+            <button
+              class="w-full bg-black text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300"
+                type="submit"
+                id="submitBtn"
+            >
+              Sign Up
+            </button>
+          </div>
+          <div class="text-center text-gray-400">
+            Already have an account?
+            <a href="{% url 'users:sign_in' %}" class="font-bold text-black">
+                Sign In 
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
