@@ -9,17 +9,13 @@
     <title>{% block title %} {% endblock %}</title>
   </head>
   <body>
+    
+   
+    {% for message in messages %}
     <div class="bg-gray-100 text-center pt-1 lg:px-4"
       style="position: absolute; top: 0; left: 0; right: 0; z-index: 1000; width: 100%;"
       id="message_alart"
     >
-      <div class="p-2 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
-        <span class="mr-2 p-1 text-left flex-auto">Hello world !</span>
-      </div>
-    </div>
-   
-    {% for message in messages %}
-    <div class="bg-gray-100 text-center pt-1 lg:px-4">
       <div class="p-2 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
         <span class="mr-2 p-1 text-left flex-auto">{{ message | safe }}</span>
       </div>
