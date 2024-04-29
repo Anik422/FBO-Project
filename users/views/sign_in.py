@@ -21,5 +21,5 @@ class SignInView(View):
             if user is not None:
                 login(request, user)
                 messages.success(request, "User logged in successfully!")
-                return redirect("users:sign_in")
+                return redirect("memberships:home")
         return render(request, "users/sign_in.html", {"form": form})

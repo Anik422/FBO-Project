@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'memberships/css/navbar.css' %}" />
+  </head>
+
+  <body class="h-screen">
+    {% for message in messages %}
+    <div
+      class="bg-gray-100 text-center pt-1 lg:px-4"
+      style="
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        width: 100%;
+      "
+      id="message_alart"
+    >
+      <div
+        class="p-2 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex"
+        role="alert"
+      >
+        <span class="mr-2 p-1 text-left flex-auto">{{ message | safe }}</span>
+      </div>
+    </div>
+    {% endfor %}
+    <header class="bg-gray-200">
+      <nav class="flex justify-between items-center w-full md:px-32 pl-9">
+        <div class="flex items-center gap-6">
+          <ion-icon
+            onclick="onToggleMenu(this)"
+            name="menu"
+            class="text-3xl cursor-pointer md:hidden"
+          ></ion-icon>
+          <div>
+            <a href="{% url 'memberships:home' %}">
+              <h3 class="text-3xl font-bold md:text-4xl">FBO</h3>
+            </a>
+          </div>
+        </div>
+
+        <div
+          class="nav-links duration-500 md:static absolute md:min-h-fit md:h-1/2 h-60 md:bg-gray-200 bg-gray-100 left-0 top-[-100%] md:w-auto w-full flex items-center px-5 ease-in-out duration-700"
+        >
+          <ul
+            class="flex md:flex-row flex-col md:items-center gap-2 font-bold w-full"
+          >
+            <li class="hover:bg-gray-200 block py-2 px-3 rounded-md">
+              <a href="{% url 'memberships:home' %}">HOME</a>
+            </li>
+            <li class="hover:bg-gray-200 block py-2 px-3 rounded-md">
+              <a href="#">PACKAGE</a>
+            </li>
+            <li class="hover:bg-gray-200 block py-2 px-3 rounded-md">
+              <a href="#">SERVICE</a>
+            </li>
+            <li class="hover:bg-gray-200 block py-2 px-3 rounded-md">
+              <a href="#">ABOUT</a>
+            </li>
+          </ul>
+        </div>
+        <div class="flex items-center gap-6">
+          <div class="dropdown">
+            <button class="dropbtn">
+              <img
+                class="md:h-10 h-8 px-10 duration-700"
+                src="https://web.dev/static/articles/building/an-adaptive-favicon/image/example-dark-theme-favico-6a6f6f67bc3e7.png"
+                alt="profile"
+              />
+            </button>
+            <div class="dropdown-content">
+              <a href="{% url 'users:profile' %}">Profile</a>
+              <a href="#">Order</a>
+              {% if user.is_authenticated %}
+              <a href="{% url 'users:sign_out_confirmation' %}">Log Out</a>
+              {% else %}
+              <a href="{% url 'users:sign_in' %}">Log In</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    {% block contentBody %}{% endblock %}
+
+    <script>
+      const navLinks = document.querySelector(".nav-links");
+      function onToggleMenu(e) {
+        e.name = e.name === "menu" ? "close" : "menu";
+        navLinks.classList.toggle("top-[7%]");
+      }
+    </script>
+    <script src="{% static 'users/js/animation.js' %}"></script>
+    <script src="{% static 'users/js/validation.js' %}"></script>
+  </body>
+</html>
