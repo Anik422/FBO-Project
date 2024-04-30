@@ -6,32 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>{% block title %} {% endblock %}</title>
     <link rel="stylesheet" href="{% static 'memberships/css/navbar.css' %}" />
   </head>
 
   <body class="h-screen">
-    {% for message in messages %}
-    <div
-      class="bg-gray-100 text-center pt-1 lg:px-4"
-      style="
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 1000;
-        width: 100%;
-      "
-      id="message_alart"
-    >
+    {% if messages %}
+      {% for message in messages %}
       <div
-        class="p-2 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex"
-        role="alert"
+        class="text-center pt-1 lg:px-4 "
+        style="
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 1000;
+          width: 100%;
+        "
+        id="message_alart"
       >
-        <span class="mr-2 p-1 text-left flex-auto">{{ message | safe }}</span>
+        <div
+          class="p-2 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex "
+          role="alert"
+        >
+          <span class="mr-2 p-1 text-left flex-auto">
+            {{ message | safe }}
+          </span>
+          <span class=" top-0 bottom-0 right-0 px-3 py-0"
+          
+          >
+            <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+          </span>
+        </div>
       </div>
-    </div>
-    {% endfor %}
+      {% endfor %}
+    {% endif %}
+
     <header class="bg-gray-200">
       <nav class="flex justify-between items-center w-full md:px-32 pl-9">
         <div class="flex items-center gap-6">

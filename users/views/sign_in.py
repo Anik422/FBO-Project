@@ -4,6 +4,8 @@ from django.views import View
 from users.forms.sign_in_form import SignInForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from users.helper import is_safe_url
+
 
 
 
@@ -11,6 +13,8 @@ class SignInView(View):
     def get(self, request):
         form = SignInForm()
         return render(request, "users/sign_in.html", {"form": form})
+    
+    
 
     def post(self, request):
         form = SignInForm(request.POST)
@@ -21,5 +25,12 @@ class SignInView(View):
             if user is not None:
                 login(request, user)
                 messages.success(request, "User logged in successfully!")
-                return redirect("memberships:home")
+                next_url = request.POST.get('next') 
+                if next_url:
+                    if is_safe_url(next_url, request.get_host()):
+                        return redirect(next_url)
+                    else:
+                        return redirect("memberships:home")
+                else:
+                    return redirect("memberships:home")
         return render(request, "users/sign_in.html", {"form": form})

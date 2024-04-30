@@ -1,5 +1,8 @@
-{% extends "memberships_base.html" %} {% block title %}FIRST BRIDGEFORD OFFICES
-FORMS FOR BAHIJ{% endblock %} {% block contentBody %}
+{% extends "memberships_base.html" %} 
+{% block title %}
+    {{ membershipPlan.name|upper }}
+{% endblock %} {% block contentBody %}
+
 <div class="min-h-screen flex justify-center items-center">
     <div class="max-w-screen-lg w-full">
         <div class="text-center font-semibold">
@@ -15,20 +18,18 @@ FORMS FOR BAHIJ{% endblock %} {% block contentBody %}
         <!-- Pricing Cards -->
         <div class="grid grid-cols-2 md:grid-cols-4 md:gap-8 gap-4 mt-12 ml-8 mr-8">
             <!-- Gold Card -->
-            {% for membership in membershipPlans %}
             <div class="bg-white text-center rounded-3xl shadow-xl p-8">
                 <h1 class="text-black font-semibold text-xl"><i class="fas fa-star" style="color: gold;"></i>
-                    {{ membership.name|upper }}
+                    {{ membershipPlan.name|upper }}
                 </h1>
                 <p class="pt-2 tracking-wide">
                     <span class="text-gray-400 align-top">$ </span>
-                    <span class="text-3xl font-semibold">{{ membership.price }}</span>
+                    <span class="text-3xl font-semibold">{{ membershipPlan.price }}</span>
                     <span class="text-gray-400 font-medium">/ user</span>
                 </p>
                 <hr class="mt-4 border-1">
-                <a href="{% url 'memberships:plan_detail' slug=membership.slug %}" class="block w-full py-2 bg-blue-600 mt-8 rounded-xl text-white font-medium">Learn More</a>
+                <a href="#" class="block w-full py-2 bg-blue-600 mt-8 rounded-xl text-white font-medium">Learn More</a>
             </div>
-            {% endfor %}
         </div>
     </div>
 </div>

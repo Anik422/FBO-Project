@@ -5,6 +5,22 @@ from django.utils.http import urlsafe_base64_encode
 from users.tokens import account_activation_token
 from django.utils.encoding import force_bytes
 from django.contrib.sites.shortcuts import get_current_site
+from urllib.parse import urlparse, urlunparse
+
+def is_safe_url(url, allowed_hosts):
+    """
+    Return True if the url is a safe redirect. Safe redirects are either:
+      - The same host as the current host
+      - A relative URL
+      - A scheme-relative URL (e.g. '//example.com')
+    """
+    parsed_url = urlparse(url)
+    return (
+        not parsed_url.netloc or
+        parsed_url.netloc == allowed_hosts or
+        parsed_url.netloc == '' and urlunparse(parsed_url) == urlunparse(urlparse(urlunparse(url)._replace(netloc=allowed_hosts)))
+    )
+
 
 
 def activateEmail(request, user, to_email):

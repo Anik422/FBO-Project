@@ -20,6 +20,14 @@ class ForgotPasswordView(PasswordResetView):
     success_url = reverse_lazy("users:password_reset_done")
     subject_template_name = "users/password_reset_subject.txt"
     token_generator = default_token_generator
+
+    def form_valid(self, form):
+        messages.success(self.request, "Password reset email has been sent. Please check your inbox.")
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, "Error submitting password reset request. Please try again.")
+        return super().form_invalid(form)
     
 class ResetPasswordEmailDoneView(PasswordChangeDoneView):
     template_name = "users/password_reset_done.html"
@@ -28,8 +36,15 @@ class ResetPasswordEmailDoneView(PasswordChangeDoneView):
 
 class ResetPasswordView(PasswordResetConfirmView):
     template_name = "users/reset_password.html"
-    success_url = reverse_lazy("users:sign_in")
+    success_url = reverse_lazy("users:password_reset_done")
     reset_url_token = "password_reset_confirm"
-    pass
+    
+    def form_valid(self, form):
+        messages.success(self.request, "Password reset successfully.")
+        return super().form_valid(form)
 
+    def form_invalid(self, form):
+        messages.error(self.request, "Password reset failed. Please try again.")
+        return super().form_invalid(form)
+ 
     
