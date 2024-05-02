@@ -1,36 +1,86 @@
-{% extends "memberships_base.html" %} 
-{% block title %}
-    {{ membershipPlan.name|upper }}
-{% endblock %} {% block contentBody %}
+{% extends "memberships_base.html" %} {% block title %}
+{{membershipPlan.name|upper }} {% endblock %} {% block contentBody %}
+<section class="h-screen py-12 bg-gray-100">
+  <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
+    <!-- Pricing Card -->
+    <div class="bg-white shadow-lg rounded-lg md:flex border-1">
+      <div class="px-6 py-8">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">
+          Choose a pricing plan:
+        </h3>
+        <ul class="md:flex grid grid-cols-2">
+          {% for pricing in pricings %} {% if forloop.counter == 1 %}
+          <li class="mb-px">
+            <button
+              onclick="changePrice( '{{ pricing.price }}', '{{ pricing.package }}', `{{ pricing.discerption }}`, '{{ pricing.slug }}', '{{ membershipPlan.slug}}')"
+              id="{{pricing.slug}}"
+              class="w-full h-16 md:py-5 px-8 bg-white border border-gray-300 md:rounded-l-lg font-semibold text-gray-800 hover:bg-gray-300 btns"
+            >
+              {{ pricing.package }}
+            </button>
+          </li>
+          {% elif forloop.counter == 4 %}
+          <li class="mb-px">
+            <button
+              onclick="changePrice( '{{ pricing.price }}', '{{ pricing.package }}', `{{ pricing.discerption }}`, '{{ pricing.slug }}', '{{ membershipPlan.slug}}')"
+              id="{{pricing.slug}}"
+              class="w-full h-16 py-2 px-8 bg-white border border-gray-300 md:rounded-r-lg font-semibold text-gray-800 hover:bg-gray-300 btns"
+            >
+              {{ pricing.package }}
+            </button>
+          </li>
+          {% else %}
+          <li class="mb-px">
+            <button
+              onclick="changePrice( '{{ pricing.price }}', '{{ pricing.package }}', `{{ pricing.discerption }}`, '{{ pricing.slug }}', '{{ membershipPlan.slug}}')"
+              id="{{pricing.slug}}"
+              class="w-full h-16 px-8 bg-white border border-gray-300 font-semibold text-gray-800 hover:bg-gray-300 btns"
+            >
+              {{ pricing.package }}
+            </button>
+          </li>
+          {% endif %} {% endfor %}
+        </ul>
 
-<div class="min-h-screen flex justify-center items-center">
-    <div class="max-w-screen-lg w-full">
-        <div class="text-center font-semibold">
-            <h1 class="text-3xl">
-                <span class="text-blue-700 tracking-wide">MEMBERSHIP</span>
-                <span>Plans</span>
-            </h1>
-            <p class="pt-6 text-xl text-gray-400 font-normal w-full px-8 md:w-full">
-                FBO offers membership packages as a simple and cost-effective way to access a wide range of facilities.
-            </p>
+        <!-- Pricing Details -->
+        <div class="mt-8 md:w-full">
+          <div class="text-lg font-semibold mb-2">
+            {{ membershipPlan.name }} details:
+          </div>
+          <p class="text-gray-700"
+            id="membership_discerption"
+          >{{ membershipPlan.description }}</p>
         </div>
+      </div>
 
-        <!-- Pricing Cards -->
-        <div class="grid grid-cols-2 md:grid-cols-4 md:gap-8 gap-4 mt-12 ml-8 mr-8">
-            <!-- Gold Card -->
-            <div class="bg-white text-center rounded-3xl shadow-xl p-8">
-                <h1 class="text-black font-semibold text-xl"><i class="fas fa-star" style="color: gold;"></i>
-                    {{ membershipPlan.name|upper }}
-                </h1>
-                <p class="pt-2 tracking-wide">
-                    <span class="text-gray-400 align-top">$ </span>
-                    <span class="text-3xl font-semibold">{{ membershipPlan.price }}</span>
-                    <span class="text-gray-400 font-medium">/ user</span>
-                </p>
-                <hr class="mt-4 border-1">
-                <a href="#" class="block w-full py-2 bg-blue-600 mt-8 rounded-xl text-white font-medium">Learn More</a>
-            </div>
+      <!-- Second Section -->
+      <div class="bg-white rounded-lg md:w-full sm:w-auto p-8">
+        <div class="text-2xl font-bold text-gray-900 mb-2">
+          {{ membershipPlan.name }} Plan
         </div>
+        <div class="text-sm text-gray-600 mb-1">Starts at</div>
+        <div class="text-3xl font-semibold text-gray-900 mb-2"
+            id="membership_price"
+        >
+          ${{ membershipPlan.price }} / Monthly
+        </div>
+        <a
+          href="#"
+          id="buy_now"
+          class="block w-full py-2 px-4 bg-blue-600 text-white font-bold rounded-md text-center hover:bg-blue-700 focus:ring-2 mb-4"
+          >Buy now</a
+        >
+        <a href="#" class="block text-blue-800 hover:text-blue-700 mb-2"
+          >View team pricing <i class="fa-solid fa-arrow-right"></i
+        ></a>
+        <p class="text-sm text-gray-600">
+          *To see the monthly email send limit included with your specific plan,
+          click Calculate my price. If your plan's contact or email send limit
+          is exceeded, you will be charged for overages.
+        </p>
+      </div>
     </div>
-</div>
+  </div>
+</section>
+
 {% endblock %}

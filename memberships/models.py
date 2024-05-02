@@ -54,10 +54,10 @@ class MembershipPlans(models.Model):
 
 class Pricing(models.Model):
     PACKAGE_OPTIONS = (
-        ("monthly", _("Monthly")),
-        ("quarterly", _("Quarterly")),
-        ("half_yearly", _("Half Yearly")),
-        ("yearly", _("Yearly")),
+        ("Monthly", _("Monthly")),
+        ("Quarterly", _("Quarterly")),
+        ("Half Yearly", _("Half Yearly")),
+        ("Yearly", _("Yearly")),
     )
     membership_plan: Iterable[MembershipPlans] = models.ForeignKey(
         MembershipPlans, on_delete=models.CASCADE, verbose_name="Membership Plan"
@@ -68,6 +68,8 @@ class Pricing(models.Model):
         default="monthly",
         verbose_name="Package",
     )
+    slug: str = models.SlugField(max_length=100, db_index=True, unique=True, default="")
+    discerption: str = models.TextField(null=True, blank=True)
     days: int = models.IntegerField(default=30, verbose_name="Days")
     price: float = models.FloatField(default=0.0, verbose_name="Price")
     created_at: str = models.DateTimeField(auto_now_add=True)
@@ -75,6 +77,10 @@ class Pricing(models.Model):
 
     def __str__(self):
         return f"{self.membership_plan} - {self.package} - {self.price}"
+    
+    def save(self, *args, **kwargs) -> None:
+        self.slug: str = slugify(self.membership_plan.name + self.package)
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name: str = "Pricing"

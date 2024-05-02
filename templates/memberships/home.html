@@ -1,32 +1,53 @@
 {% extends "memberships_base.html" %} {% block title %}FIRST BRIDGEFORD OFFICES
 FORMS FOR BAHIJ{% endblock %} {% block contentBody %}
-<div class="min-h-screen flex justify-center items-center">
-    <div class="max-w-screen-lg w-full">
+<div class="min-h-screen flex justify-center items-center pt-8">
+    <div class="max-w-screen-xl w-full">
         <div class="text-center font-semibold">
             <h1 class="text-3xl">
                 <span class="text-blue-700 tracking-wide">MEMBERSHIP</span>
                 <span>Plans</span>
             </h1>
             <p class="pt-6 text-xl text-gray-400 font-normal w-full px-8 md:w-full">
-                FBO offers membership packages as a simple and cost-effective way to access a wide range of facilities.
+                FBO offers membership packages as a simple and cost-effective way to access a wide range of
+                facilities.
             </p>
         </div>
 
         <!-- Pricing Cards -->
-        <div class="grid grid-cols-2 md:grid-cols-4 md:gap-8 gap-4 mt-12 ml-8 mr-8">
+        <div class=" grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 md:gap-8 gap-4 mt-12 ml-4 mr-4">
             <!-- Gold Card -->
             {% for membership in membershipPlans %}
             <div class="bg-white text-center rounded-3xl shadow-xl p-8">
-                <h1 class="text-black font-semibold text-xl"><i class="fas fa-star" style="color: gold;"></i>
-                    {{ membership.name|upper }}
-                </h1>
+                <h1 class="text-black font-semibold text-xl"><i class="fas fa-star" style="color: gold;"></i> {{ membership.name|upper }} </h1>
                 <p class="pt-2 tracking-wide">
                     <span class="text-gray-400 align-top">$ </span>
-                    <span class="text-3xl font-semibold">{{ membership.price }}</span>
-                    <span class="text-gray-400 font-medium">/ user</span>
+                    <span class="text-3xl font-semibold">
+                        {{ membership.price }}
+                    </span>
+                    <span class="text-gray-400 font-medium">/ month</span>
                 </p>
                 <hr class="mt-4 border-1">
-                <a href="{% url 'memberships:plan_detail' slug=membership.slug %}" class="block w-full py-2 bg-blue-600 mt-8 rounded-xl text-white font-medium">Learn More</a>
+                <div class="pt-8">
+                    {% for service in membershipServices %}
+                    {% if service not in membership.access_to_services.all %}
+                    <p class="font-semibold text-black text-left pt-5">
+                        <i class="fa-solid fa-xmark text-red-600"></i>
+                        <span class="pl-1">
+                            {{ service.name }}
+                        </span>
+                    </p>
+                    {% else %}
+                    <p class="font-semibold text-black text-left pt-5">
+                        <i class="fa-solid fa-check text-green-600"></i>
+                        <span class="pl-1">
+                            {{ service.name }}
+                        </span>
+                    </p>
+                    {% endif %}
+                    {% endfor %}
+                    
+                </div>
+                <a href="{% url 'memberships:plan_detail' slug=membership.slug %}"  class="block w-full py-2 bg-blue-600 mt-8 rounded-xl text-white font-medium">Learn More <i class="fa-solid fa-arrow-right"></i></a>
             </div>
             {% endfor %}
         </div>

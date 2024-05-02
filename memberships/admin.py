@@ -23,9 +23,6 @@ class SubscriptionPlanAdmin(admin.ModelAdmin):
     list_display_links = ("subscription_id", "membership_plan", "user", "pricing", "number_of_people", "active")
     list_filter = ("membership_plan", "pricing", "active")
 
-    
-    
-
 
 
 class PricingAdmin(admin.ModelAdmin):
