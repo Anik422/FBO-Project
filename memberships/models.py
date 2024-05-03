@@ -121,6 +121,7 @@ class SubscriptionPlan(models.Model):
     def save(self, *args, **kwargs):
         if not self.subscription_id:
             self.subscription_id = self.generate_unique_id()
-        if self.pricing and not self.end_date:
-            self.end_date = self.start_date + timedelta(days=self.pricing.days)
+        if self.pricing and not self.end_date and self.start_date:
+            print(self.pricing.days, "***************")
+            self.end_date = self.start_date + timedelta(days=int(self.pricing.days))
         super().save(*args, **kwargs)

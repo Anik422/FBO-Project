@@ -10,6 +10,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
     <title>{% block title %} {% endblock %}</title>
     <link rel="stylesheet" href="{% static 'memberships/css/navbar.css' %}" />
   </head>
@@ -75,7 +76,7 @@
               <a href="{% url 'memberships:home' %}">HOME</a>
             </li>
             <li class="hover:bg-gray-200 block py-2 px-3 rounded-md">
-              <a href="#">PACKAGE</a>
+              <a href="{% url 'memberships:packageView' %}">PACKAGE</a>
             </li>
             <li class="hover:bg-gray-200 block py-2 px-3 rounded-md">
               <a href="#">SERVICE</a>
@@ -110,8 +111,7 @@
           {% else %}
           <div class="dropdown">
             <button class="dropbtn">
-              <div class="py-2 px-10 duration-700 hover:bg-gray-200 rounded-md"
-              >
+              <div class="py-2 px-10 duration-700 hover:bg-gray-200 rounded-md">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

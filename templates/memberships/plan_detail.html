@@ -47,37 +47,116 @@
           <div class="text-lg font-semibold mb-2">
             {{ membershipPlan.name }} details:
           </div>
-          <p class="text-gray-700"
-            id="membership_discerption"
-          >{{ membershipPlan.description }}</p>
+          <p class="text-gray-700" id="membership_discerption">
+            {{ membershipPlan.description }}
+          </p>
         </div>
       </div>
 
       <!-- Second Section -->
-      <div class="bg-white rounded-lg md:w-full sm:w-auto p-8">
+      <div class="bg-white rounded-lg md:w-full p-8">
         <div class="text-2xl font-bold text-gray-900 mb-2">
           {{ membershipPlan.name }} Plan
         </div>
-        <div class="text-sm text-gray-600 mb-1">Starts at</div>
-        <div class="text-3xl font-semibold text-gray-900 mb-2"
-            id="membership_price"
+        <div class="grid md:grid-cols-2 md:gap-6">
+          <div class="relative z-0 w-full mb-5 group">
+            <div
+              class="py-2 px-3 inline-block bg-white border border-gray-200 rounded-lg"
+            >
+              <div class="flex items-center gap-x-1.5">
+                <button
+                  type="button"
+                  id="decrement"
+                  class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                  data-hs-input-number-decrement=""
+                >
+                  <svg
+                    class="flex-shrink-0 size-3.5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14"></path>
+                  </svg>
+                </button>
+                <input
+                  id="quantity"
+                  name="quantity"
+                  class="p-0 w-6 bg-transparent border-0 text-gray-800 text-center focus:ring-0"
+                  type="text"
+                  value="1"
+                />
+                <button
+                  type="button"
+                  id="increment"
+                  class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                  data-hs-input-number-increment=""
+                >
+                  <svg
+                    class="flex-shrink-0 size-3.5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14"></path>
+                    <path d="M12 5v14"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="relative z-0 w-full mb-5 group">
+            <div class="relative max-w-sm">
+              <div
+                class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"
+              >
+                <svg
+                  class="w-4 h-4 text-gray-500"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                  />
+                </svg>
+              </div>
+              <input
+                datepicker
+                type="text"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                placeholder="Select date"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="text-3xl font-semibold text-gray-900 mb-2"
+          id="membership_price"
         >
           ${{ membershipPlan.price }} / Monthly
         </div>
         <a
-          href="#"
+          href="javascript:void(0)"
           id="buy_now"
           class="block w-full py-2 px-4 bg-blue-600 text-white font-bold rounded-md text-center hover:bg-blue-700 focus:ring-2 mb-4"
-          >Buy now</a
         >
-        <a href="#" class="block text-blue-800 hover:text-blue-700 mb-2"
-          >View team pricing <i class="fa-solid fa-arrow-right"></i
-        ></a>
-        <p class="text-sm text-gray-600">
-          *To see the monthly email send limit included with your specific plan,
-          click Calculate my price. If your plan's contact or email send limit
-          is exceeded, you will be charged for overages.
-        </p>
+          Buy now
+        </a>
       </div>
     </div>
   </div>

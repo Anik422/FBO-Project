@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect
 from memberships.models import MembershipPlans, MembershipServices, Pricing
 
 
+
+
 class HomeView(ListView):
     template_name = "memberships/home.html"
     model = MembershipPlans
@@ -34,7 +36,14 @@ class PlanDetailView(DetailView):
         return context
 
 
-class PlansView(ListView):
-    template_name = "memberships/plans.html"
+class PackageView(ListView):
+    template_name = "memberships/PACKAGE.html"
     model = MembershipPlans
     context_object_name = "membershipPlans"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        membershipServices = MembershipServices.objects.all()
+        context["title"] = "Home"
+        context["membershipServices"] = membershipServices
+        return context
