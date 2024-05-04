@@ -4,11 +4,20 @@ const membership_discerption = document.getElementById(
 );
 const membership_price = document.getElementById("membership_price");
 
+let packageSlugVal = '';
+let membershipPlanSlugVal = ''
+
 buy_now.addEventListener("click", (e) => {
-  console.log(buy_now.href, "@@@@@@@@@@@");
-  if (buy_now.href === "javascript:void(0)") {
+  let selectDate = document.getElementById("booking_date").value;
+  if (selectDate == "") {
+    document.getElementById("dateError").innerHTML = "Please select a date.";
+    document.getElementById("dateError").style.display = "inline";
     e.preventDefault();
-    alert("Please select a package to continue");
+  } else if (packageSlugVal == "") {
+    alert("Please select a package.");
+    e.preventDefault();
+  } else {
+    document.getElementById("membership_form").action = `/subscription/order/${membershipPlanSlugVal}/${packageSlugVal}/`;
   }
 });
 
@@ -27,7 +36,9 @@ function changePrice(
   btn.classList.add("bg-gray-300");
   membership_price.innerHTML = `$${price} / ${package}`;
   membership_discerption.innerHTML = discerption;
-  buy_now.href = `/subscription/${membershipPlanSlug}/${packageSlug}/`;
+  // buy_now.href = `/subscription/${membershipPlanSlug}/${packageSlug}/`;
+  packageSlugVal = packageSlug;
+  membershipPlanSlugVal = membershipPlanSlug
 }
 
 const quantity = document.getElementById("quantity");
@@ -51,3 +62,29 @@ decrement.addEventListener("click", () => {
     increment.disabled = false;
   }
 });
+
+function formatDate(date) {
+  var d = new Date(date),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
+
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [year, month, day].join("-");
+}
+
+function checkDate() {
+  var selectedDate = formatDate(document.getElementById("booking_date").value);
+  var today = formatDate(new Date());
+
+  if (selectedDate < today) {
+    decrement.getElementById("dateError").innerHTML =
+      "Please select a date equal to or later than today.";
+    document.getElementById("dateError").style.display = "inline";
+  } else {
+    document.getElementById("dateError").style.display = "none";
+    document.getElementById("dateError").innerHTML = "";
+  }
+}

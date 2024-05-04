@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing Card</title>
+    <link rel="stylesheet" href="plan_box.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
+  </head>
+
+  <body>
+    <section class="py-12 bg-gray-100">
+      <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
+        <!-- Pricing Card -->
+        <div class="bg-white shadow-lg rounded-lg md:flex border-1">
+          <div class="px-6 py-8">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">
+              Choose a pricing plan:
+            </h3>
+            <ul class="md:flex grid grid-cols-2">
+              <li class="mb-px">
+                <button
+                  class="w-full h-16 md:py-5 px-8 bg-white border border-gray-300 md:rounded-l-lg font-semibold text-gray-800 hover:bg-gray-50"
+                >
+                  Monthly
+                </button>
+              </li>
+              <li class="mb-px">
+                <button
+                  class="w-full h-16 px-8 bg-white border border-gray-300 font-semibold text-gray-800 hover:bg-gray-50"
+                >
+                  Quarterly
+                </button>
+              </li>
+              <li class="mb-px">
+                <button
+                  class="w-full h-16 px-10 bg-white border border-gray-300 font-semibold text-gray-800 hover:bg-gray-50"
+                >
+                  Half Yearly
+                </button>
+              </li>
+              <li class="mb-px">
+                <button
+                  class="w-full h-16 py-2 px-8 bg-white border border-gray-300 md:rounded-r-lg font-semibold text-gray-800 hover:bg-gray-50"
+                >
+                  Yearly
+                </button>
+              </li>
+            </ul>
+
+            <!-- Pricing Details -->
+            <div class="mt-8 md:w-full">
+              <div class="text-lg font-semibold mb-2">GOLD details:</div>
+              <p class="text-gray-700">
+                One Person, 16 days access per month, Two guest passes per week,
+                printing and copying pass, Complimentary coffee. Reservation
+                required for Executive offices and board rooms
+              </p>
+            </div>
+          </div>
+
+          <!-- Second Section -->
+          <div class="bg-white rounded-lg md:w-full sm:w-auto p-8">
+            <div class="text-2xl font-bold text-gray-900 pb-6">GOLD Plan</div>
+
+            <div class="flex justify-between pb-5">
+              <!-- Input Number -->
+              <div
+                class="py-2 px-3 inline-block bg-white border border-gray-200 rounded-lg"
+                data-hs-input-number=""
+              >
+                <div class="flex items-center gap-x-1.5">
+                  <button
+                    type="button"
+                    class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                    data-hs-input-number-decrement=""
+                  >
+                    <svg
+                      class="flex-shrink-0 size-3.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M5 12h14"></path>
+                    </svg>
+                  </button>
+                  <input
+                    class="p-0 w-6 bg-transparent border-0 text-gray-800 text-center focus:ring-0"
+                    type="text"
+                    value="0"
+                    data-hs-input-number-input=""
+                  />
+                  <button
+                    type="button"
+                    class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                    data-hs-input-number-increment=""
+                  >
+                    <svg
+                      class="flex-shrink-0 size-3.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M5 12h14"></path>
+                      <path d="M12 5v14"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <!-- End Input Number -->
+
+              <div class="relative w-40">
+                <div
+                  class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+                >
+                  <svg
+                    class="w-4 h-4 text-gray-500"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                    />
+                  </svg>
+                </div>
+                <input
+                  datepicker
+                  datepicker-autohide
+                  type="text"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                  placeholder="Select date"
+                />
+              </div>
+            </div>
+
+            <p class="pt-2 tracking-wide">
+              <span class="text-gray-600 font-bold text-xl align-top">$ </span>
+              <span class="text-5xl font-semibold">00</span>
+              <span class="text-gray-600 text-2xl font-semibold">/ month</span>
+
+              <a
+                href="#"
+                class="mt-4 block w-full py-2 px-4 bg-blue-600 text-white font-bold rounded-md text-center hover:bg-blue-700 focus:ring-2 mb-4"
+                >Buy now</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
