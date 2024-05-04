@@ -1,0 +1,72 @@
+{% extends "memberships_base.html" %} {% block title %}
+Order List | {{ user.username }}
+{% endblock %} {% block contentBody %}
+
+<div class="min-h-screen flex justify-center items-center pt-0">
+    <div class="max-w-screen-xl w-full">
+        <div class="text-center font-semibold">
+            <h1 class="text-3xl">
+                <span class="text-blue-700 tracking-wide">ORDER</span>
+                <span>List</span>
+            </h1>
+            <p class="pt-6 text-xl text-gray-400 font-normal w-full px-8 md:w-full">
+                Here is the list of all your orders.
+            </p>
+        </div>
+
+        <!-- Order List -->
+        <div class=" grid grid cols-1 lg:grid-cols-4 md:grid-cols-2 md:gap-8 gap-4 mt-12 ml-4 mr-4">
+            <!-- Order Card -->
+            {% for order in orders %}
+            <div class="bg-white text-center rounded-3xl shadow-xl p-8">
+                <h1 class="text-black font-semibold text-xl"><i class="fas fa-star" style="color: gold;"></i> {{ order.membership_plan.name|upper }} </h1>   
+                <p class="pt-2 tracking-wide">
+                    <span class="text-gray-400 align-top">$ </span>
+                    <span class="text-3xl font-semibold">
+                        {{ order.pricing.price }}
+                    </span>
+                    <span class="text-gray-400 font-medium">/ {{ order.pricing.package }}</span>
+                </p>
+                <hr class="mt-4 border-1">
+                <div class="pt-8">
+                    <p class="font-semibold text-black text-left">
+                        <i class="fa-solid fa-id-card text-blue-600"></i>
+                        <span class="pl-1">
+                            {{ order.subscription_id }}
+                        </span>
+                    </p>
+                    <p class="font-semibold text-black text-left pt-5">
+                        <i class="fa-solid fa-calendar text-blue-600"></i>
+                        <span class="pl-1">
+                            {{ order.start_date }}
+                        </span>
+                    </p>
+                    <p class="font-semibold text-black text-left pt-5">
+                        <i class="fa-solid fa-calendar text-blue-600"></i>
+                        <span class="pl-1">
+                            {{ order.end_date }}
+                        </span>
+                    </p>
+                    {% if order.active == True %}
+                    <p class="font-semibold text-black text-left pt-5">
+                        <i class="fa-solid fa-check text-green-600"></i>
+                        <span class="pl-1">
+                            Active
+                        </span>
+                    </p>
+                    {% else %}
+                    <p class="font-semibold text-black text-left pt-5">
+                        <i class="fa-solid fa-times text-red-600"></i>
+                        <span class="pl-1">
+                            Inactive
+                        </span>
+                    </p>
+                    {% endif %}
+                </div>
+                <!-- <a href=""  class="block w-full py-2 bg-blue-600 mt-8 rounded-xl text-white font-medium">View Order <i class="fa-solid fa-arrow-right"></i></a> -->
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

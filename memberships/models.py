@@ -89,31 +89,27 @@ class Pricing(models.Model):
 
 
 class SubscriptionPlan(models.Model):
+    subscription_id = models.CharField(max_length=10, unique=True, null=True, blank=True)
     membership_plan = models.ForeignKey(MembershipPlans, on_delete=models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     pricing = models.ForeignKey(Pricing, on_delete=models.CASCADE, null=True, blank=True)
     number_of_people = models.IntegerField(verbose_name="Number of People", default=1)
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField(null=True, blank=True)
+    start_date = models.DateField()
+    end_date = models.DateField(null=True, blank=True)
     active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def generate_unique_id(self) -> str:
-        unique_id = secrets.token_hex(5)  # Generate a random hex string of 10 characters
-        return unique_id
+    # generate unique subscription id and check uniqueness or regenerate
+    def generate_unique_id(self):
+        while True:
+            subscription_id = secrets.token_urlsafe(5)
+            if not SubscriptionPlan.objects.filter(subscription_id=subscription_id).exists():
+                return subscription_id
+                
 
-    def encrypt_id(self, unique_id: str) -> str:
-        # Encrypt the unique ID using hashlib
-        encrypted_id = hashlib.sha256(unique_id.encode()).hexdigest()
-        return encrypted_id
-
-    @property
-    def subscription_id(self) -> str:
-        unique_id = self.generate_unique_id()
-        encrypted_id = self.encrypt_id(unique_id)
-        return encrypted_id[:10]  # Return the first 10 characters of the encrypted ID
-
+    
+    
     def __str__(self):
         return f"{self.user} - {self.membership_plan}"
     
@@ -122,6 +118,5 @@ class SubscriptionPlan(models.Model):
         if not self.subscription_id:
             self.subscription_id = self.generate_unique_id()
         if self.pricing and not self.end_date and self.start_date:
-            print(self.pricing.days, "***************")
             self.end_date = self.start_date + timedelta(days=int(self.pricing.days))
         super().save(*args, **kwargs)

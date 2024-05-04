@@ -40,4 +40,4 @@ class SubscriptionPlanOrder(CreateView):
         except Pricing.DoesNotExist:
             messages.error(request, "Pricing package not found.")
         
-        return redirect(reverse_lazy("memberships:home"))
+        return redirect(reverse_lazy("memberships:order_list"))
